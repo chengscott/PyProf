@@ -181,14 +181,14 @@ class Linear(OperatorLayerBase):
         if self.op_ == "linear":
             if self.dir == "fprop":
                 f = m * n * k * 2
-                b = m * n + m * k + n * k * Utility.typeToBytes(self.type)
+                b = (m * n + m * k + n * k) * Utility.typeToBytes(self.type)
             elif self.dir == "bprop":
                 if self.sub == 0:  #dgrad (most likely)
                     f = m * n * k * 2
-                    b = m * n + m * k + n * k * Utility.typeToBytes(self.type)
+                    b = (m * n + m * k + n * k) * Utility.typeToBytes(self.type)
                 elif self.sub == 1:  #wgrad (most likely)
                     f = m * n * k * 2
-                    b = m * n + m * k + n * k * Utility.typeToBytes(self.type)
+                    b = (m * n + m * k + n * k) * Utility.typeToBytes(self.type)
                 else:
                     #This happens when there are additional kernels for reduction
                     f = 0
